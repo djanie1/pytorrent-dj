@@ -24,9 +24,9 @@ class Peer(object):
         self.bit_field = bitstring.BitArray(number_of_pieces)
         self.state = {
             #'am_choking': True,
-            'am_interested': False,
+            #'am_interested': False,
             #'peer_choking': True,
-            #'peer_interested': False,
+            'peer_interested': False,
         }
 
     def __hash__(self):
@@ -45,13 +45,13 @@ class Peer(object):
 
         return True
 
-    ''' def send_to_peer(self, msg):
+    def send_to_peer(self, msg):
         try:
             self.socket.send(msg)
             self.last_call = time.time()
         except Exception as e:
             self.healthy = False
-            logging.error("Failed to send to peer : %s" % e.__str__()) '''
+            logging.error("Failed to send to peer : %s" % e.__str__())
 
     def is_eligible(self):
         now = time.time()
@@ -72,11 +72,11 @@ class Peer(object):
     def is_unchoked(self):
         return not self.is_choking() '''
 
-    ''' def is_interested(self):
-        return self.state['peer_interested'] '''
+    def is_interested(self):
+        return self.state['peer_interested']
 
-    def am_interested(self):
-        return self.state['am_interested']
+    ''' def am_interested(self):
+        return self.state['am_interested'] '''
 
     ''' def handle_choke(self):
         logging.debug('handle_choke - %s' % self.ip)
@@ -86,17 +86,17 @@ class Peer(object):
         logging.debug('handle_unchoke - %s' % self.ip)
         self.state['peer_choking'] = False '''
 
-    ''' def handle_interested(self):
+    def handle_interested(self):
         logging.debug('handle_interested - %s' % self.ip)
-        self.state['peer_interested'] = True '''
+        self.state['peer_interested'] = True
 
         ''' if self.am_choking():
             unchoke = message.UnChoke().to_bytes()
             self.send_to_peer(unchoke) '''
 
-    ''' def handle_not_interested(self):
+    def handle_not_interested(self):
         logging.debug('handle_not_interested - %s' % self.ip)
-        self.state['peer_interested'] = False '''
+        self.state['peer_interested'] = False
 
     def handle_have(self, have):
         """
@@ -106,10 +106,10 @@ class Peer(object):
         self.bit_field[have.piece_index] = True
 
         #if self.is_choking() and not self.state['am_interested']:
-        if not self.state['am_interested']:
+        ''' if not self.state['am_interested']:
             interested = message.Interested().to_bytes()
             self.send_to_peer(interested)
-            self.state['am_interested'] = True
+            self.state['am_interested'] = True '''
 
         # pub.sendMessage('RarestPiece.updatePeersBitfield', bitfield=self.bit_field)
 
@@ -121,10 +121,10 @@ class Peer(object):
         self.bit_field = bitfield.bitfield
 
         #if self.is_choking() and not self.state['am_interested']:
-        if not self.state['am_interested']:
+        ''' if not self.state['am_interested']:
             interested = message.Interested().to_bytes()
             self.send_to_peer(interested)
-            self.state['am_interested'] = True
+            self.state['am_interested'] = True '''
 
         # pub.sendMessage('RarestPiece.updatePeersBitfield', bitfield=self.bit_field)
 
