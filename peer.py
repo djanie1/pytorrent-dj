@@ -88,9 +88,9 @@ class Peer(object):
 
     ''' def handle_interested(self):
         logging.debug('handle_interested - %s' % self.ip)
-        self.state['peer_interested'] = True '''
+        self.state['peer_interested'] = True 
 
-        ''' if self.am_choking():
+        if self.am_choking():
             unchoke = message.UnChoke().to_bytes()
             self.send_to_peer(unchoke) '''
 

@@ -19,7 +19,8 @@ class Run(object):
 
     def __init__(self):
         try:
-            torrent_file = sys.argv[1]
+            #torrent_file = sys.argv[1]
+            torrent_file = '*.torrent'
         except IndexError:
             logging.error("No torrent file provided!")
             sys.exit(0)
